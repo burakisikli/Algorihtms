@@ -1,5 +1,28 @@
 # Midterm 2 Sample Questions
 
+## Question 1
+Assume you have a graph G of n nodes and m undirected edges. Design an efficient algorithm (polynomial in n and m) that
+ outputs 1 if it contains a cycle
+ outputs 2 if it is a tree
+ outputs 3 if it is connected
+(Hint. you can use breath first search as a subroutine – provided that you know its running time).
+(Note that the program may output more than one number, e.g. 1 & 3) 
+
+## Solution 1
+If graph contains a cycle and it's connected, then it's a tree so that we need to find out if it contains a cycle and is connected.
+Contains a cycle?
+An undirected graph is acyclic (i.e., a forest) iff a DFS yields no back edges.
+Since back edges are those edges (u, v) connecting a vertex u to an ancestor
+v in a depth-first tree, so no back edges means there are only tree edges, so
+there is no cycle.
+So we can simply fun DFS. If find a back edge, there is a cycle. The complexity
+is O(V ) instead of O(E + V ). Since if there is a back edge, it must
+be found before seeing |V | distinct edges. This is because in a acyclic (undirected
+) forest, |E| ≤ |V | + 1
+
+http://www.geeksforgeeks.org/detect-cycle-undirected-graph/</br>
+http://www.cs.jhu.edu/~xfliu/600.363_F03/hw_solution/midterm2_solution</br>
+
 ## Question 2 
 Suppose that we are given an instance of the Minimum Spanning Tree Problem on a graph G which has
 positive distinct edge costs. Let T be a minimum (cost) spanning tree for G. Now we make a new graph G’
