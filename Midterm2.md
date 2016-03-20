@@ -37,11 +37,67 @@ Answer the following considering this definition: Let S[j] as the length of the 
 ## Solution 4
 Se LIS.c
 
-Dynamic programming Vazirani, page 170
+Dynamic programming Vazirani, page 170</br>
 for j = 1, 2, . . . , n:
 L(j) = 1 + max{L(i) : (i, j) ∈ E}
 return maxj L(j)
 
-https://www.hackerrank.com/challenges/longest-increasing-subsequent
-http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/
+https://www.hackerrank.com/challenges/longest-increasing-subsequent</br>
+http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/</br>
 
+## Question 5
+Design a Dynamic Programming algorithm to solve the Maximum Sum Problem defined below,
+and write the final solution as an O(n) iterative i.e. non-recursive pseudo-code.
+Maximum Sum Problem: Given a sequence of n numbers: a1, a2, . . . , an , what is the maximum you can
+obtain from a consecutive sum ai, ai+1...
+Example: If the numbers are 2,4,-5,7,-3,8,-2 the answer is 12 (because of 7,-3,8).
+(Note. Some numbers may be negative otherwise ...)
+a) [1 pts] What is the brute force solution? Write a pseudo code (or Java code) to solve it and give its running
+time.
+b) [2pts] Design the DP algoritm.
+Hint. Let Opt[k] denote the maximum that can be obtained by a consecutive subsequence sum that ends
+exactly at index k. Then express Opt[k] recursively as we did in the class. 
+
+## Solution 5
+a) To find the subarray with the largest sum, we can easily come up with a brute force solution. That is, use three for loops to traverse through the array and compute the sum of each subarray. Each time we get a sum, we will update current maximum sum if the new sum is greater. So let Sum[i..j] be the sum of the ith element all through the jth element (0 <= i <= j < n). To traverse through all possible Sum[i..j], the time complexity would be O(N^3):
+
+// This code fragment was a quote from Beauty of Programming
+int MaxSum(int* A, int n)
+{
+    int maximum = -INF;
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i; j < n; j++)
+        {
+            for (int k = i; k <= j; k++)
+            {
+                sum += A[k];
+            }
+            if (sum > maximum)
+                maximum = sum;
+            sum = 0; // reset it to 0, or sum would be the sum of all subarrays.
+        }
+    }
+    return maximum;
+}
+
+b) Let’s instead focus on computing OPT0
+(n): the optimal sum of a subarray ending at A[n].
+Consider whether A[n] is in the optimal solution:
+– if so, then OPT(n) = OPT(n − 1) + A[n]
+– if not, then OPT(n) = 0 (sum of the empty array)
+Thus, we have a relation 
+OPT(n) = max{OPT(n − 1) + A[n], 0}.
+
+Max-Subarray-Sum(A, n)
+16 opt ← 0, opt0 ← 0
+17 for i ← 1 to n
+18 do opt0 ← max{0, opt0 + A[i]}
+19 opt ← max{opt, opt0}
+20 return opt
+
+https://courses.cs.washington.edu/courses/cse421/11su/slides/06dp-kevinz.pdf</br>
+http://www.geeksforgeeks.org/largest-sum-contiguous-subarray/</br>
+http://www.cse.ust.hk/~dekai/271/notes/L02/L02.pdf</br>
+https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/en/07.0.md
