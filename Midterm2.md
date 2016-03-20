@@ -19,11 +19,29 @@ You are supposed to determine whether there is a path of length K or less from a
 the given end point in a 2D maze. Can this problem solved efficiently? How would you solve this problem? 
 
 ## Solution 3
-To find a path instead of the shortest path, use any graph traversal (e.g. depth-first or best-first). It won't necessarily be faster, in fact it may check many more nodes than A* on some graphs, so it depends on your data. However, it will be easier to implement and the constant factors will be significantly lower.
+Yes, to find a path instead of the shortest path, use any graph traversal (e.g. depth-first or best-first). It won't necessarily be faster, in fact it may check many more nodes than A* on some graphs, so it depends on your data. However, it will be easier to implement and the constant factors will be significantly lower.
 
 To avoid search for a path when there is none, you could create disjoint sets (once after you built the graph) to very quickly check whether two given points are connected. This takes linear space and linear time to build, and lookup takes amortized practically-constant time, but you still need to run your full algorithm at times, as it will only tell you whether there is a path, not where that path goes.</br>
-https://www.cs.bu.edu/teaching/alg/maze/
+https://www.cs.bu.edu/teaching/alg/maze/</br>
 http://stackoverflow.com/questions/15508370/ai-fastest-algorithm-to-find-if-path-exists
 
+## Question 4
+You are given problem X defined below.
+Problem X: Given a sequence of N numbers: a1, a2, . . . , aN , what is the length of the Longest nondecreasing
+Subsequence? Note that a subsequence is different from substring and need not be consecutive.
+Example: The length of the longest non-decreasing subsequence of [1,8, 6, 7, 9, 1] is 4; because, as we scan the
+list from left to right we can pick numbers that obey the non-decreasing constraint to make the subsequence
+[1,6,7,9] and there is no longer subsequence that obeys the non-decreasing constraint.
+Answer the following considering this definition: Let S[j] as the length of the longest non-decreasing subsequence which ends in aj.
 
+## Solution 4
+Se LIS.c
+
+Dynamic programming Vazirani, page 170
+for j = 1, 2, . . . , n:
+L(j) = 1 + max{L(i) : (i, j) ∈ E}
+return maxj L(j)
+
+https://www.hackerrank.com/challenges/longest-increasing-subsequent
+http://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/
 
